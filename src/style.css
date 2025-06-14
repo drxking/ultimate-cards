@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+
+.contant,
+.contant img {
+  transform-style: preserve-3d; /* helps with rotation performance */
+}
+
+html, body {
+  height: 100vh;
+  overflow: hidden;
+}
+
+
