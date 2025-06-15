@@ -1,7 +1,7 @@
 import fs from "fs/promises"
 import path from "path";
 
-const folderPath = './public'; // adjust if needed
+const folderPath = './resized'; // adjust if needed
 const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp'];
 
 (async () => {

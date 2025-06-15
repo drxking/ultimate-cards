@@ -44,7 +44,7 @@ requestAnimationFrame(raf);
 // ⬇️ Your existing GSAP + image circle logic
 // --------------------------------------------
 
-const IMAGE_COUNT = 25;
+const IMAGE_COUNT = 20;
 const RADIUS = 240;
 const ROTATE_PER_IMAGE = 360 / IMAGE_COUNT;
 const images = Array.from({ length: IMAGE_COUNT }, (_, i) => `/img${i + 1}.jpg`);
@@ -57,6 +57,7 @@ images.forEach((src, i) => {
   const posY = Math.sin(angle) * RADIUS;
   const rotation = (ROTATE_PER_IMAGE * i) + 90;
   const img = document.createElement("img");
+  console.log(angle)
   img.src = src;
   img.className = "absolute h-14 w-10 rounded-md";
   img.style.zIndex = z
@@ -97,23 +98,23 @@ function createScrollAnimation() {
       // markers: true
     }
   });
-tl.to(".tt",{
-  opacity:0,
-  duration:0.1
-},"a")
-tl.to("img",{
-    rotateY:180,
-    rotateX:360,
-    duration:0.65
-  },"a")
+  tl.to(".yy", {
+    y: `-100%`,
+    duration: 0.1
+  }, "a")
+  tl.to("img", {
+    rotateY: 180,
+    rotateX: 360,
+    duration: 0.65
+  }, "a")
   tl.to(".contant", {
     scale: 4,
     rotate: -252,
     y: 1000,
     ease: "none",
     duration: 0.65
-  },"a")
-  
+  }, "a")
+
   tl.to(".contant", {
     rotate: -360,
     ease: "none",
@@ -133,3 +134,6 @@ const setVH = () => {
 };
 setVH();
 window.addEventListener('resize', setVH);
+
+
+console.log(Math.PI)

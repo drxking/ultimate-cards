@@ -12,3 +12,8 @@ html, body {
 }
 
 
+
+html::-webkit-scrollbar{
+  width: 1px;
+}
+

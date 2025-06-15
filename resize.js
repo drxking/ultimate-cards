@@ -3,8 +3,8 @@ import fs from 'fs';
 import path from 'path';
 import sharp from 'sharp';
 
-const inputFolder = './public';      // your image folder
-const outputFolder = './resized';    // resized output folder
+const inputFolder = './public2';      // your image folder
+const outputFolder = './public';    // resized output folder
 const width = 300;                   // target width
 const height = 420;                  // target height
 
