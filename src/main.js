@@ -44,8 +44,11 @@ requestAnimationFrame(raf);
 // ⬇️ Your existing GSAP + image circle logic
 // --------------------------------------------
 
+
+let Scale = (window.innerWidth < 600) ? 3 : 4;
+let TranlateY = (window.innerWidth < 600) ? 600 : 1000;
 const IMAGE_COUNT = 20;
-const RADIUS = 240;
+const RADIUS = (window.innerWidth < 600) ? 180 : 240;
 const ROTATE_PER_IMAGE = 360 / IMAGE_COUNT;
 const images = Array.from({ length: IMAGE_COUNT }, (_, i) => `/img${i + 1}.jpg`);
 let z = images.length + 20
@@ -59,19 +62,13 @@ images.forEach((src, i) => {
   const img = document.createElement("img");
   console.log(angle)
   img.src = src;
-  img.className = "absolute h-14 w-10 rounded-md";
+  img.className = "absolute h-14 w-10 rounded-md ";
+
   img.style.zIndex = z
   contant.appendChild(img);
-
+  console.log(rotation)
   z--
-
-
-  gsap.to(img, {
-    x: posX,
-    y: posY,
-    delay: i * 0.05 + 0.5,
-    rotate: rotation,
-    duration: 0.8,
+  let ll = gsap.timeline({
     onComplete: () => {
       loaded++;
       if (loaded === IMAGE_COUNT) {
@@ -82,7 +79,26 @@ images.forEach((src, i) => {
 
       }
     }
+  })
+  ll.set(img, {
+    rotateY: -180
+  })
+  ll.to(img, {
+    duration: 0.3,
+    rotate: rotation,
+    ease: "none",
+    x: posX / 2,
+    y: posY / 2,
+    delay: i * 0.05 + 1,
+
   });
+  ll.to(img, {
+    x: posX,
+    rotateY: 0,
+    y: posY,
+    duration: 0.5,
+    // delay:0.5
+  })
 });
 
 // 🔁 Scroll-triggered animation with Lenis support
@@ -108,9 +124,9 @@ function createScrollAnimation() {
     duration: 0.65
   }, "a")
   tl.to(".contant", {
-    scale: 4,
+    scale: Scale,
     rotate: -252,
-    y: 1000,
+    y: TranlateY,
     ease: "none",
     duration: 0.65
   }, "a")
@@ -134,6 +150,3 @@ const setVH = () => {
 };
 setVH();
 window.addEventListener('resize', setVH);
-
-
-console.log(Math.PI)
