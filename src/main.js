@@ -1,4 +1,4 @@
-import gsap from "gsap";
+import gsap, { Power3 } from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import Lenis from 'lenis';
 
@@ -44,6 +44,18 @@ requestAnimationFrame(raf);
 // ⬇️ Your existing GSAP + image circle logic
 // --------------------------------------------
 
+let blurries = document.querySelectorAll(".blurry")
+blurries.forEach((blurred) => {
+  let clutter = "";
+  let texts = blurred.innerHTML
+  texts.split(" ").forEach((e) => {
+
+    clutter += `<span class="inline-block  overflow-hidden"><span class="race-cont inline-block relative translate-y-[100%]"> <span class="inline-block  blurry-text">${e}&nbsp;</span> </span></span>`
+  })
+  console.log(clutter)
+  blurred.innerHTML = clutter
+})
+
 
 let Scale = (window.innerWidth < 600) ? 3 : 4;
 let TranlateY = (window.innerWidth < 600) ? 600 : 1000;
@@ -71,7 +83,14 @@ images.forEach((src, i) => {
   let ll = gsap.timeline({
     onComplete: () => {
       loaded++;
+
       if (loaded === IMAGE_COUNT) {
+        gsap.to(".race-cont",{
+          y:`0`,
+          scale:1,
+          stagger:0.02,
+          ease:Power3.easeOut
+        })
         document.querySelector(".tt").style.opacity = 1
         document.body.style.overflow = "unset"
         document.querySelector("html").style.overflow = "unset"
@@ -101,6 +120,7 @@ images.forEach((src, i) => {
   })
 });
 
+
 // 🔁 Scroll-triggered animation with Lenis support
 function createScrollAnimation() {
   const tl = gsap.timeline({
@@ -114,9 +134,16 @@ function createScrollAnimation() {
       // markers: true
     }
   });
-  tl.to(".yy", {
+  tl.to(".yy,.race,.helmet", {
     y: `-100%`,
     duration: 0.1
+  }, "a")
+  tl.to(".blurry-text", {
+    y: `-100%`,
+    // filter:`blur(3px)`,
+    duration: 0.1,
+    stagger: 0.007,
+    // opacity:0
   }, "a")
   tl.to("img", {
     rotateY: 180,
@@ -150,3 +177,7 @@ const setVH = () => {
 };
 setVH();
 window.addEventListener('resize', setVH);
+
+
+
+

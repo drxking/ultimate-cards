@@ -10,10 +10,21 @@ html, body {
   height: 100vh;
   overflow: hidden;
 }
-
+*{
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
 
 
 html::-webkit-scrollbar{
   width: 1px;
 }
+
+.press-start-2p-regular {
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
 
