@@ -50,7 +50,7 @@ blurries.forEach((blurred) => {
   let texts = blurred.innerHTML
   texts.split(" ").forEach((e) => {
 
-    clutter += `<span class="inline-block  overflow-hidden"><span class="race-cont inline-block relative translate-y-[100%]"> <span class="inline-block  blurry-text">${e}&nbsp;</span> </span></span>`
+    clutter += `<span class="inline-block  overflow-hidden"><span class="race-cont-span blur-sm inline-block relative translate-y-[200%]"> <span class="inline-block  blurry-text">${e}&nbsp;</span> </span></span>`
   })
   console.log(clutter)
   blurred.innerHTML = clutter
@@ -85,11 +85,19 @@ images.forEach((src, i) => {
       loaded++;
 
       if (loaded === IMAGE_COUNT) {
-        gsap.to(".race-cont",{
+        let xyz = gsap.timeline()
+        xyz.to(".race-cont",{
           y:`0`,
           scale:1,
-          stagger:0.02,
-          ease:Power3.easeOut
+          stagger:0.07,
+          ease:"power2.out"
+        })
+        xyz.to(".race-cont-span",{
+          y:`0`,
+          scale:1,
+          stagger:0.015,
+          filter:`blur(0px)`,
+          ease:"power3.out"
         })
         document.querySelector(".tt").style.opacity = 1
         document.body.style.overflow = "unset"
