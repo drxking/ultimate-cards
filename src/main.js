@@ -74,7 +74,7 @@ images.forEach((src, i) => {
   const img = document.createElement("img");
   console.log(angle)
   img.src = src;
-  img.className = "absolute h-14 w-10 rounded-md ";
+  img.className = "absolute h-14 w-10 rounded-md opacity-0";
 
   img.style.zIndex = z
   contant.appendChild(img);
@@ -91,7 +91,11 @@ images.forEach((src, i) => {
           scale:1,
           stagger:0.07,
           ease:"power2.out"
-        })
+        },"a")
+        xyz.to(".tts",{
+          opacity:1,
+          duration:0.2
+        },"a")
         xyz.to(".race-cont-span",{
           y:`0`,
           scale:1,
@@ -99,7 +103,6 @@ images.forEach((src, i) => {
           filter:`blur(0px)`,
           ease:"power3.out"
         })
-        document.querySelector(".tt").style.opacity = 1
         document.body.style.overflow = "unset"
         document.querySelector("html").style.overflow = "unset"
         createScrollAnimation();
@@ -110,13 +113,18 @@ images.forEach((src, i) => {
   ll.set(img, {
     rotateY: -180
   })
+  ll.to(img,{
+    rotate: rotation,
+    opacity:1,
+    duration:0.3,
+    ease:'none',
+    delay: i * 0.05 + 1,
+  })
   ll.to(img, {
     duration: 0.3,
-    rotate: rotation,
     ease: "none",
     x: posX / 2,
     y: posY / 2,
-    delay: i * 0.05 + 1,
 
   });
   ll.to(img, {
@@ -149,8 +157,8 @@ function createScrollAnimation() {
   tl.to(".blurry-text", {
     y: `-100%`,
     // filter:`blur(3px)`,
-    duration: 0.1,
-    stagger: 0.007,
+    duration: 0.04,
+    stagger: 0.002,
     // opacity:0
   }, "a")
   tl.to("img", {
